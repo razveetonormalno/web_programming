@@ -3,10 +3,9 @@
 	<head>
 		<meta content="text/html; charset=utf-8" />
 		<title>Аптека</title>
-        <link rel="stylesheet" type="text/css" href="/Users/maksim/Desktop/Web/Lab_5/css/catalog.css">
         <link rel="stylesheet" type="text/css" href="/Users/maksim/Desktop/Web/Lab_5/css/styles.css">
 	</head>
-	<body>
+    <body>
         <div id="wraper">
             <header>
                 <div class="head">
@@ -24,20 +23,15 @@
             </header>
 
             <main>
-                <h1>Каталог</h1>
-                <div class="divTable catalogTable">
-                    <div class="divTableBody">
-                        <div class="divTableRow">
-                            <div class="divTableCell"><a href="beauti.html">Красота и здоровье</a></div>
-                            <div class="divTableCell"><a href="cosmetic.html">Активная косметика</a></div>
-                            <div class="divTableCell"><a href="diet.html">Лекарства и БАДы</a></div>
-                        </div>
+                <h1 align="center">Лекарства по выгодным ценам!</h1>
+                <div class="container">
+                    <div class="tabs">
+                        <a href=""><span class="active">Новые</span></a>
+                        <a href=""><span>Старые</span></a>
+                        <a href=""><span>Добавить</span></a>
+                    </div>
+                    <div class="content">
                         
-                        <div class="divTableRow">
-                            <div class="divTableCell"><a href="mother.html">Мама и малыш</a></div>
-                            <div class="divTableCell"><a href="tech.html">Медицинские приборы</a></div>
-                            <div class="divTableCell"><a href="ortho.html">Ортопедия</a></div>
-                        </div>
                     </div>
                 </div>
             </main>
@@ -50,5 +44,9 @@
                 </div>
             </footer>
         </div>
+
+        <script type="text/javascript" src="../jquery-3.6.4.min.js"></script>
+        <script type="text/javascript" src="scpt.js"></script>
+    
     </body>
 </html>
