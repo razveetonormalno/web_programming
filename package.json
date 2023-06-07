@@ -1,14 +1,5 @@
 {
-  "name": "lab6",
-  "version": "1.0.0",
-  "description": "package for lab6",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "http-server": "^14.1.1"
+    "express": "^4.18.2"
   }
 }
