@@ -4,15 +4,11 @@ body {
 }
 h1 {
     text-align: center;
-    color: #2f6bcb;
 }
 a {
     color: #797a7c;
 }
-div {
-    /* margin: auto; */
-    background-color: #fff;
-}
+
 div.catalogTable {
     margin: auto;
     border: 2px solid #000000;

@@ -9,9 +9,7 @@ h1 {
     text-align: center;
     color: #2f6bcb;
 }
-div {
-    background-color: #fff;
-}
+
 div.catalogTable {
     margin: auto;
     border: 2px solid #000000;
@@ -20,6 +18,7 @@ div.catalogTable {
 }
 .divTable.catalogTable .divTableCell, .divTable.catalogTable .divTableHead {
     border: 1px solid #AAAAAA;
+    background-color: #fff;
 }
 .divTable.catalogTable .divTableBody .divTableCell {
     font-size: 20px;
