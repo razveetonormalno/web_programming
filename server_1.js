@@ -1,11 +1,20 @@
 const express = require("express");
 const http = require("http"); 
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const MedicineController = require("./controller/MedicineController.js");
+const UsersController = require("./controller/UserController.js");
 
 let app = express();
 
-mongoose.connect('mongodb://0.0.0.0:27017/timedesk', { useNewUrlParser: true, useUnifiedTopology: true })  // Подключаемся к БД
+http.createServer(app).listen(3000); // Начинаем слушать запросы
+
+app.use('/', express.static(__dirname + '/client'));
+app.use('/user/:username', express.static(__dirname + '/client'));
+
+// командуем Express принять поступающие объекты JSON
+app.use(express.urlencoded({ extended: true }));
+
+mongoose.connect('mongodb://0.0.0.0:27017/lab_9', { useNewUrlParser: true, useUnifiedTopology: true })  // Подключаемся к БД
 	.then(() => { // Успешное подключение
         	console.log('db connected...');
     	})
@@ -13,39 +22,19 @@ mongoose.connect('mongodb://0.0.0.0:27017/timedesk', { useNewUrlParser: true, us
         	console.log('bad connection...');
     	});
 
-let Medicine = mongoose.model('Medicine', new Schema({ description: String, tags: [ String ] })); // Создаем модель данных
+app.get("/medicine.json", MedicineController.index);
+app.get("/medicine/:id", MedicineController.show); 
+app.post("/medicine", MedicineController.create);
+app.put("/medicine/:id", MedicineController.update);
+app.delete("/medicine/:id", MedicineController.destroy);
 
-app.use(express.static(__dirname + "/client"));
-http.createServer(app).listen(3000); // Начинаем слушать запросы
+app.get("/users/:username/medicine.json", MedicineController.index);
+app.post("/users/:username/medicine", MedicineController.create);
+app.put("/users/:username/medicine/:id", MedicineController.update);
+app.delete("/users/:username/medicine/:id", MedicineController.destroy);
 
-app.get("/medicine.json", async (req, res) => { // Настраиваем маршрутизатор для GET-запроса
-		await Medicine.find() // Выбираем все объекты модели данных
-				.then((med) => { // Успешная читка
-					res.json(med);
-				})
-				.catch((err) => { // Ошибка читки
-					console.log(err);
-				});
-});
-
-app.use(express.urlencoded({ extended: true }));
-
-app.post("/medicine", async (req, res) => { // Настроиваем маршрутизатор для POST-запроса
-	console.log(req.body);
-	let newMed = new Medicine({"description":req.body.description, "tags":req.body.tags});
-	
-	const newMedicineDoc = await newMed.save() // Сохраняем (добавляем) новые данные в модель данных
-			.then(async (result) => { // Данные успешно сохранены
-				await Medicine.find()
-					.then(async (result) => { // Успешная читка
-						res.json(result);
-					})
-					.catch(async (err) => { // Ошибка читки
-						res.send('ERROR');
-					});
-			})
-			.catch(async (err) => { // Ошибка сохранения
-				console.log(err);
-				res.send('ERROR');
-			});
-});
+app.get("/users.json", UsersController.index); 
+app.post("/users", UsersController.create); 
+app.get("/users/:username", UsersController.show);
+app.put("/users/:username", UsersController.update);
+app.delete("/users/:username", UsersController.destroy);
