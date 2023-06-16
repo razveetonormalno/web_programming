@@ -44,6 +44,7 @@ MedicineController.create = async function (req, res) {
 		"tags": req.body.tags
 	});
 
+	console.log("вызвано действие: MedicineController.create");
 	console.log("username: " + username);
 
 	await User.find({"username": username})
@@ -56,6 +57,7 @@ MedicineController.create = async function (req, res) {
 			await newMed.save()
 				.then(async (result) => {
 					res.status(200).json(result);
+					console.log("New data: " + result);
 				})
 				.catch(async (err) => {
 					console.log(err);
@@ -69,6 +71,7 @@ MedicineController.create = async function (req, res) {
 
 MedicineController.show = async function (req, res) {
 	// это ID, который мы отправляем через URL
+	console.log("вызвано действие: MedicineController.show");
 	var id = req.params.id;
 
 	let userResultId;
@@ -93,6 +96,7 @@ MedicineController.show = async function (req, res) {
 };
 
 MedicineController.destroy = async function (req, res) {
+	console.log("вызвано действие: MedicineController.destroy");
 	var id = req.params.id;
 
 	await Med.deleteOne({"_id": id})
@@ -105,12 +109,15 @@ MedicineController.destroy = async function (req, res) {
 }
 
 MedicineController.update = async function (req, res) {
+	console.log("вызвано действие: MedicineController.update");
+
 	var id = req.params.id;
 	var newDescription = {$set: {description: req.body.description}};
 
 	await Med.updateOne({"_id": id}, newDescription)
 		.then(async (todo) => {
 			res.status(200).json(todo);
+			console.log("New data:" + todo);
 		})
 		.catch(async (err) => {
 			res.status(500).json(err);
