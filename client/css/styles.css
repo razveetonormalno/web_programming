@@ -110,3 +110,16 @@ footer {
     display: flex;
     flex-direction: column;
 }
+
+.logOrRegRefBlock {
+    margin-top: 20px;
+}
+
+.buttonUser {
+    height: 35px;
+    font-size: 13px;
+    padding-left: 10px;
+    border: 1.5px solid rgb(177, 203, 255);
+    border-radius: 23px;
+    margin-right: 20px;
+}
